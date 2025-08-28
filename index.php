@@ -1,13 +1,18 @@
 <?php
-try {
-    $pdo = new PDO('mysql:host=127.0.0.1;dbname=testdb', 'root', '');
-    $stmt = $pdo->query("SHOW TABLES");
-    $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    echo "<h2>Hello PHP!</h2>";
-    echo "<p>PHP Version: " . phpversion() . "</p>";
-    echo "<p>Database tables:</p><pre>";
-    print_r($tables);
-    echo "</pre>";
-} catch (PDOException $e) {
-    echo "DB Connection failed: " . $e->getMessage();
+// 自动创建 SQLite 数据库文件 test.db
+$db = new PDO('sqlite:./test.db');
+
+// 创建表
+$db->exec("CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+)");
+
+// 插入一条数据
+$db->exec("INSERT INTO users (name) VALUES ('Tom')");
+
+// 查询并显示
+$rows = $db->query("SELECT * FROM users");
+foreach ($rows as $row) {
+    echo "ID: {$row['id']}, Name: {$row['name']}<br>";
 }

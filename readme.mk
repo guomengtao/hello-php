@@ -1,4 +1,4 @@
-#用 Gitpod 预览 PHP + MySQL 项目
+#用 Gitpod 预览 PHP + SQLlite 项目
 
 快速访问
 

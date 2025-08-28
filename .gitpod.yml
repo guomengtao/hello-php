@@ -3,16 +3,9 @@ image:
 
 tasks:
   - init: |
-      # 启动 MySQL 服务
-      sudo service mysql start
-
-      # 创建数据库
-      mysql -e "CREATE DATABASE IF NOT EXISTS testdb;"
-
-      # 导入 SQL（如果存在）
-      if [ -f init.sql ]; then
-        mysql testdb < init.sql
-      fi
+      # 安装 Composer（可选，如果需要依赖）
+      curl -sS https://getcomposer.org/installer | php -- --install-dir=/workspace --filename=composer
+      export PATH="/workspace:$PATH"
     command: |
       # 启动 PHP 内置服务器
       php -S 0.0.0.0:8080
