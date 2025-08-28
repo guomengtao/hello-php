@@ -6,4 +6,5 @@ tasks:
     command: php -S 0.0.0.0:8080
 ports:
   - port: 8080
-    onOpen: open-browser
+    onOpen: open-preview   # 改成 open-preview 更可靠
+    
