@@ -3,18 +3,19 @@ image:
 
 tasks:
   - init: |
-      # 启动 MySQL
-      mkdir -p /workspace/mysql-data
-      mysqld_safe --datadir=/workspace/mysql-data &
-      sleep 5
-      # 创建数据库并导入 SQL
+      # 启动 MySQL 服务
+      sudo service mysql start
+
+      # 创建数据库
       mysql -e "CREATE DATABASE IF NOT EXISTS testdb;"
+
+      # 导入 SQL（如果存在）
       if [ -f init.sql ]; then
         mysql testdb < init.sql
       fi
-      # 安装 PHP 依赖
-      composer install
-  - command: php -S 0.0.0.0:8000
-    openMode: preview
-
-    
+    command: |
+      # 启动 PHP 内置服务器
+      php -S 0.0.0.0:8080
+ports:
+  - port: 8080
+    onOpen: open-browser
