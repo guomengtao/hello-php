@@ -1,21 +1,22 @@
 image:
   file: .gitpod.Dockerfile
 
+# 自动运行任务
 tasks:
   - init: |
-      # 启动 MySQL
-      sudo service mysql start || true
       # 创建数据库
       mysql -e "CREATE DATABASE IF NOT EXISTS testdb;"
-      # 自动导入 SQL 文件
+      # 导入 SQL 文件（如果存在）
       if [ -f init.sql ]; then
         mysql testdb < init.sql
       fi
-      # 安装依赖
+      # 安装 PHP 依赖
       composer install || true
-    command: |
-      # 启动 PHP 内置服务器
-      php -S 0.0.0.0:8080
+    command: php -S 0.0.0.0:8080
+
+# 端口配置
 ports:
   - port: 8080
     onOpen: open-preview
+  - port: 3306
+    onOpen: ignore

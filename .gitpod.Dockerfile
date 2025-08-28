@@ -1,4 +1,4 @@
-# 使用官方 PHP 镜像
+# 使用官方 PHP CLI 镜像
 FROM php:8.2-cli
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,10 +11,8 @@ RUN apt-get update && apt-get install -y \
     curl \
     && docker-php-ext-install pdo pdo_mysql mysqli
 
-# 创建 /workspace 目录（可写）
+# 安装 Composer 到 /workspace 目录（可写）
 RUN mkdir -p /workspace
-
-# 安装 Composer 到 /workspace
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/workspace --filename=composer
 ENV PATH="/workspace:$PATH"
 
