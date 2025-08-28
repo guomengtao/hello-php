@@ -2,13 +2,8 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: |
-      # 安装 Composer（可选，如果需要依赖）
-      curl -sS https://getcomposer.org/installer | php -- --install-dir=/workspace --filename=composer
-      export PATH="/workspace:$PATH"
-    command: |
-      # 启动 PHP 内置服务器
-      php -S 0.0.0.0:8080
+  - init: echo "Workspace ready. SQLite will auto-create test.db on first run."
+    command: php -S 0.0.0.0:8080
 ports:
   - port: 8080
     onOpen: open-browser

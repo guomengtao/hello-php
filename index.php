@@ -1,18 +1,24 @@
 <?php
-// 自动创建 SQLite 数据库文件 test.db
-$db = new PDO('sqlite:./test.db');
+$dbFile = __DIR__ . '/test.db';
 
-// 创建表
-$db->exec("CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT
-)");
+try {
+    $db = new PDO("sqlite:$dbFile");
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// 插入一条数据
-$db->exec("INSERT INTO users (name) VALUES ('Tom')");
+    $db->exec("CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL
+    )");
 
-// 查询并显示
-$rows = $db->query("SELECT * FROM users");
-foreach ($rows as $row) {
-    echo "ID: {$row['id']}, Name: {$row['name']}<br>";
+    $db->exec("INSERT INTO users (name) VALUES ('Tom')");
+    
+    $rows = $db->query("SELECT * FROM users");
+
+    echo "<h2>SQLite Demo</h2>";
+    foreach ($rows as $row) {
+        echo "ID: {$row['id']}, Name: {$row['name']}<br>";
+    }
+
+} catch (PDOException $e) {
+    echo "DB Error: " . $e->getMessage();
 }
