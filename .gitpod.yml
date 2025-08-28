@@ -20,9 +20,8 @@ tasks:
       # 导入 SQL 初始化数据
       mysql -h 127.0.0.1 -P 3306 -u root -proot testdb < init.sql
 
-      # 安装 PHP 依赖
-      composer install
   - command: php -S 0.0.0.0:8080 -t /workspace
 ports:
   - port: 8080
     onOpen: open-preview
+    
