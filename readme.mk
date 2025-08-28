@@ -4,21 +4,21 @@
 
 直接打开 Gitpod 预览：
 
-https://gitpod.io/#https://github.com/guomengtao/tp5-shop
+https://gitpod.io/#https://github.com/guomengtao/hello-php
 
 指定某个版本（commit 或 tag）：
 
-https://gitpod.io/#https://github.com/guomengtao/tp5-shop/tree/<commit_hash或tag>
+https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/<commit_hash或tag>
 
 示例（tag 方式）：
 
-https://gitpod.io/#https://github.com/guomengtao/tp5-shop/tree/v1.0
+https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/v1.0
 
 示例（commit_hash 方式）：
 
-https://gitpod.io/#https://github.com/guomengtao/tp5-shop/tree/3da108
+https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/3da108
 或
-https://gitpod.io/#https://github.com/guomengtao/tp5-shop/tree/3da10809c8ccdd6ac24162f80f3286ebd526c097
+https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/3da10809c8ccdd6ac24162f80f3286ebd526c097
 
 
 
