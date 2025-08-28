@@ -1,8 +1,6 @@
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    email VARCHAR(100)
+    name VARCHAR(50) NOT NULL
 );
 
-INSERT INTO users (username, email) VALUES ('tom', 'tom@example.com');
-
+INSERT INTO users (name) VALUES ('Alice'), ('Bob'), ('Tom');

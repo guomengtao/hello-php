@@ -1,23 +1,21 @@
-# 基础镜像
-FROM ubuntu:22.04
+# 使用官方 PHP 镜像
+FROM php:8.2-cli
 
-# 使用 root
-USER root
+# 安装必要扩展和工具
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    default-mysql-client \
+    unzip \
+    git \
+    curl \
+    && docker-php-ext-install pdo pdo_mysql mysqli
 
-# 避免交互式安装报错
-ENV DEBIAN_FRONTEND=noninteractive
+# 安装 Composer 到用户目录
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/workspace --filename=composer
+ENV PATH="/workspace:$PATH"
 
-# 安装 PHP +常用扩展 + MySQL 客户端 + curl
-RUN apt-get update && apt-get install -y \
-    php-cli php-mbstring php-xml php-mysql unzip curl mysql-client \
-    && apt-get clean
-
-
-# 创建工作目录
+# 设置工作目录
 WORKDIR /workspace
 
-# 暴露 PHP 内置服务器端口
-EXPOSE 8080
-
-# 暴露 MySQL 端口（如果想直接外部访问）
-EXPOSE 3306
+# 复制项目文件
+COPY . /workspace

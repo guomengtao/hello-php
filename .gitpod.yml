@@ -1,20 +1,28 @@
 image:
   file: .gitpod.Dockerfile
 
+# 启动 MySQL 容器
+services:
+  - image: mysql:8.0
+    env:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+    ports:
+      - 3306:3306
+    command: ["--default-authentication-plugin=mysql_native_password"]
+
 tasks:
   - init: |
-      echo "=== 初始化数据库 ==="
-      # 启动临时 MySQL 服务
-      docker run -d --name mysql-dev -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test -p 3306:3306 mysql:8.0
       # 等待 MySQL 启动
+      echo "Waiting for MySQL..."
       sleep 10
-      # 导入 SQL
-      if [ -f db/init.sql ]; then
-          mysql -h 127.0.0.1 -uroot -proot test < init.sql
-      fi
-  - command: |
-      echo "=== 启动 PHP 内置服务器 ==="
-      php -S 0.0.0.0:8080 -t 
+
+      # 导入 SQL 初始化数据
+      mysql -h 127.0.0.1 -P 3306 -u root -proot testdb < init.sql
+
+      # 安装 PHP 依赖
+      composer install
+  - command: php -S 0.0.0.0:8080 -t /workspace
 ports:
   - port: 8080
     onOpen: open-preview
