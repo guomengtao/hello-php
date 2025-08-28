@@ -1,6 +1,20 @@
+image:
+  file: .gitpod.Dockerfile
+
 tasks:
-  - init: echo "Workspace ready!"
-    command: php -S 0.0.0.0:8080 -t .
+  - init: |
+      echo "=== 初始化数据库 ==="
+      # 启动临时 MySQL 服务
+      docker run -d --name mysql-dev -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test -p 3306:3306 mysql:8.0
+      # 等待 MySQL 启动
+      sleep 10
+      # 导入 SQL
+      if [ -f db/init.sql ]; then
+          mysql -h 127.0.0.1 -uroot -proot test < init.sql
+      fi
+  - command: |
+      echo "=== 启动 PHP 内置服务器 ==="
+      php -S 0.0.0.0:8080 -t 
 ports:
   - port: 8080
     onOpen: open-preview
