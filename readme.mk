@@ -12,7 +12,9 @@ https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/<commit_hash或t
 
 示例（tag 方式）：
 
-https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/v1.0
+https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/v1.0.0
+
+https://gitpod.io/#https://github.com/guomengtao/hellog-php/tree/v1.0.1
 
 示例（commit_hash 方式）：
 
