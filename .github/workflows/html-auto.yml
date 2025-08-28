@@ -1,31 +1,28 @@
-name: Auto Commit HTML
+name: Test PAT Push
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # 手动触发
 
 jobs:
-  build:
+  test-pat:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Commit and push changes
+      - name: Test push with PAT
         env:
           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # 添加所有新文件和修改
-          git add .
-          
-          # 提交，如果没有更改就跳过
-          git commit -m "自动创建英语单词学习HTML" || echo "没有更改可提交"
-          
+
+          # 在本地创建一个临时文件用于测试 push
+          echo "test" > pat_test.txt
+          git add pat_test.txt
+          git commit -m "Test PAT push" || echo "没有更改可提交"
+
           # 设置远程 URL 使用 PAT
           git remote set-url origin https://$PAT_TOKEN@github.com/guomengtao/hello-php.git
-          
-          # 推送到 main
+
+          # push 到 main 分支
           git push origin main
