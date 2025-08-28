@@ -16,7 +16,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "自动创建英语单词学习HTML：dog" || echo "没有更改可提交"
+          git commit -m "自动创建英语单词学习HTML" || echo "没有更改可提交"
           git remote set-url origin https://$PAT_TOKEN@github.com/guomengtao/hello-php.git
           git push origin main
         env:
