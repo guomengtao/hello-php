@@ -14,7 +14,7 @@ https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/<commit_hash或t
 
 https://gitpod.io/#https://github.com/guomengtao/hello-php/tree/v1.0.0
 
-https://gitpod.io/#https://github.com/guomengtao/hellog-php/tree/v1.0.1
+https://gitpod.io/#https://github.com/guomengtao/hellog-php/tree/v1.0.3
 
 示例（commit_hash 方式）：
 
