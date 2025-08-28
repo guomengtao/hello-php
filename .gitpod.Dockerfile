@@ -12,8 +12,6 @@ RUN apt-get update && apt-get install -y \
     php-cli php-mbstring php-xml php-mysql unzip curl mysql-client \
     && apt-get clean
 
-# 安装 Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # 创建工作目录
 WORKDIR /workspace
