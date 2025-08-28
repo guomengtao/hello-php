@@ -10,7 +10,7 @@ RUN apt-get update && \
     curl \
     && docker-php-ext-install pdo pdo_mysql mysqli
 
-# 安装 Composer 到用户目录
+# 安装 Composer 到用户可写目录
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/workspace --filename=composer
 ENV PATH="/workspace:$PATH"
 
