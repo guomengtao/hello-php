@@ -11,12 +11,13 @@ RUN apt-get update && \
     && docker-php-ext-install pdo pdo_mysql mysqli \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 关键修复：安装到Gitpod用户有权限的目录
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/home/gitpod/.local/bin --filename=composer
-ENV PATH="/home/gitpod/.local/bin:$PATH"
-
 # 设置工作目录
 WORKDIR /workspace
 
-# 确保目录权限正确
-RUN mkdir -p /home/gitpod/.local/bin && chown -R gitpod:gitpod /home/gitpod/.local/bin
+# 复制项目文件
+COPY . /workspace
+
+# 可选：添加PHP配置优化开发体验
+RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini && \
+    echo "display_errors = On" >> /usr/local/etc/php/php.ini && \
+    echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
