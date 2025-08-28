@@ -14,7 +14,8 @@ try {
 
     $db->exec("INSERT INTO users (name) VALUES ('Jack')");
     
-    $rows = $db->query("SELECT * FROM users");
+    $stmt = $db->query("SELECT * FROM users");
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo "<h2>SQLite Demo</h2>";
     foreach ($rows as $row) {
