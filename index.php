@@ -11,6 +11,9 @@ try {
     )");
 
     $db->exec("INSERT INTO users (name) VALUES ('Tom')");
+
+    $db->exec("INSERT INTO users (name) VALUES ('Jack')");
+
     
     $rows = $db->query("SELECT * FROM users");
 
