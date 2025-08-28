@@ -1,28 +1,24 @@
-name: Test PAT Push
+name: Test Push With GitHub Token
 
 on:
-  workflow_dispatch:  # 手动触发
+  workflow_dispatch: # 手动触发
 
 jobs:
-  test-pat:
+  test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 必须加这个，允许写入仓库
     steps:
       - uses: actions/checkout@v3
 
-      - name: Test push with PAT
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      - name: Test push with GITHUB_TOKEN
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 在本地创建一个临时文件用于测试 push
-          echo "test" > pat_test.txt
-          git add pat_test.txt
-          git commit -m "Test PAT push" || echo "没有更改可提交"
+          echo "test $(date)" > test_token.txt
+          git add test_token.txt
+          git commit -m "Test push with GITHUB_TOKEN" || echo "nothing to commit"
 
-          # 设置远程 URL 使用 PAT
-          git remote set-url origin https://$PAT_TOKEN@github.com/guomengtao/hello-php.git
-
-          # push 到 main 分支
+          # 注意这里不用改远程 URL
           git push origin main
